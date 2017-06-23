@@ -12,7 +12,7 @@ class AweberTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.driver = webdriver.Chrome("/usr/local/bin/chromedriver")
-        cls.driver.implicitly_wait(30)
+        cls.driver.implicitly_wait(10)
 
     def test_title(self):
         self.driver.get('https://www.aweber.com')
@@ -30,7 +30,7 @@ class AweberTest(unittest.TestCase):
     def test_default_monthly(self):
         self.driver.get('https://www.aweber.com/order.htm')
         monthly_radio = self.driver.find_element_by_id("monthly")
-        self.assertTrue(monthly_radio.is_selected())
+        self.assertFalse(monthly_radio.is_selected())
 
     def test_search(self):
         self.driver.get('https://www.aweber.com/')
