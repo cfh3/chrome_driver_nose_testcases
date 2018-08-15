@@ -8,32 +8,32 @@ import unittest
 from selenium import webdriver
 
 
-class AweberTest(unittest.TestCase):
+class ElementTestsClass(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.driver = webdriver.Chrome("/usr/local/bin/chromedriver")
         cls.driver.implicitly_wait(10)
 
     def test_title(self):
-        self.driver.get('https://www.aweber.com')
-        self.assertEqual(self.driver.title, "Email Marketing | AWeber")
+        self.driver.get('https://the-internet.herokuapp.com/')
+        self.assertEqual(self.driver.title, "The Internet")
         time.sleep(5)
 
-    def test_pricing(self):
-        self.driver.get('https://www.aweber.com')
-        menu_button = self.driver.find_element_by_css_selector("li.hamburger-button")
+    def test_floating_menu(self):
+        self.driver.get('https://the-internet.herokuapp.com/floating_menu')
+        menu_button = self.driver.find_element_by_css_selector("#menu > ul > li:nth-child(1) > a")
         menu_button.click()
-        pricing_link = self.driver.find_element_by_link_text("Standard Pricing")
-        pricing_link.click()
+        # pricing_link = self.driver.find_element_by_link_text("Standard Pricing")
+        # pricing_link.click()
         time.sleep(5)
 
     def test_default_monthly(self):
-        self.driver.get('https://www.aweber.com/order.htm')
+        self.driver.get('https://the-internet.herokuapp.com/')
         monthly_radio = self.driver.find_element_by_id("monthly")
         self.assertFalse(monthly_radio.is_selected())
 
     def test_search(self):
-        self.driver.get('https://www.aweber.com/')
+        self.driver.get('https://the-internet.herokuapp.com/')
         search_input = self.driver.find_element_by_id("query")
         search_input.send_keys('Meet the Team')
         search_submit = self.driver.find_element_by_class_name("search-submit")
